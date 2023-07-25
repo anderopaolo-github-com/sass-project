@@ -1,0 +1,84 @@
+@mixin list-reset {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+@mixin justify-space {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@mixin centering {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+@mixin overlay($color, $opacity) {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba($color, $opacity);
+}
+@mixin v-middle {
+  left: 50%;
+  transform: translateX(-50%);
+}
+@mixin go-up($animation-name) {
+  @-webkit-keyframes #{$animation-name} {
+    @content;
+  }
+  @keyframes #{$animation-name} {
+    @content;
+  }
+}
+@mixin multi-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+@mixin three-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+@mixin blue-line {
+  content: "";
+  position: absolute;
+  background-color: skyblue;
+  height: 2px;
+  width: 100px;
+  bottom: -20px;
+  @include v-middle;
+}
+@mixin square {
+  content: '';
+  position: absolute;
+  background-color: white;
+  border: 3px solid skyblue;
+  width: 7px;
+  height: 7px;
+  bottom: -28px;
+  left: 50%;
+  transform: rotate(45deg) translateX(-50%);
+}
+@mixin line {
+  content: "";
+  position: absolute;
+  width: 100px;
+  height: 3px;
+  background-color: skyblue;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 50px;
+}
+@mixin form {
+  width: 100%;
+  background: none;
+  border: {
+    top: 0;
+    left: 0;
+    right: 0;
+  }
+}

@@ -1,0 +1,442 @@
+@use "./vars" as *;
+@use "./mixin" as *;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+:focus {
+  outline: none;
+}
+::placeholder {
+  color: white;
+}
+input {
+  caret-color: skyblue;
+  color: white;
+}
+textarea {
+  color: white;
+}
+body {
+  font-family: 'Open Sans', sans-serif;
+}
+ul {
+  @include list-reset;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  padding: {
+    left: 0.9375rem;  
+    right: 0.9375rem;  
+  }
+  margin: {
+    left: auto;
+    right: auto
+  }
+  @media ($min-small) {
+    width: 750px;
+  }
+  @media ($min-medium) {
+    width: 970px;
+  }
+  @media ($min-large) {
+    width: 1170px;
+  }
+}
+// header
+header {
+  box-shadow: 0 0 10px #eee;
+  padding: 1rem;
+  .container {
+    @include justify-space;
+    img {
+      width: 140px;
+    }
+    aside {
+      position: relative;
+      i {
+        @media ($min-medium) {
+          display: none;
+        }
+      }
+      @media ($small) {
+        &:hover {
+          ul {
+            display: flex;
+            position: absolute;
+            flex-direction: column;
+            right: -10px;
+            top: 40px;
+            background-color: rgb(135, 214, 245, 0.8);
+            border-radius: 0.5rem;
+            z-index: 1;
+            &:before {
+              content: "";
+              position: absolute;
+              border: {
+                style: solid;
+                width: 15px;
+                color: transparent transparent rgb(135, 214, 245, 0.8);
+              }
+              top: -30px;
+              right: 5px;
+            }
+            li {
+              padding: 1rem;
+              a {
+                color: white;
+              }
+            }
+          }
+        }
+      }
+      ul {
+        @include centering;
+        @media ($medium) {
+          display: none;
+        }
+        li {
+          a {
+            color: black;
+            padding: 0 17px;
+            transition: 0.3s;
+            &:hover {
+              color: cyan;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+// landing
+.landing {
+  text-align: center;
+  position: relative;
+  &:before {
+    @include overlay(black, 0.7);
+  }
+  background: {
+    image: url("../imgs/header.jpg");
+    size: cover;
+    repeat: no-repeat;
+  }
+  height: 60vh;
+  @include centering;
+  .container {
+    .box {
+      color: white;
+      position: relative;
+      h1 {
+        margin: {
+          top: 1rem;
+          bottom: 1rem;
+        }
+      }
+      form {
+        @include centering;
+        gap: 1rem;
+        @media ($small) {
+          flex-direction: column;
+        }
+        button {
+          &:first-child,
+          &:last-child {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            text-transform: uppercase;
+            border: 0;
+            transition: 0.3s;
+            &:hover {
+              background-color: rgb(8, 196, 196);
+              color: white;
+            }
+          }
+          &:last-child {
+            color: white;
+            background-color: rgb(8, 196, 196);
+            &:hover {
+              background-color: white;
+              color: rgb(8, 196, 196);
+            }
+          }
+        }
+      }
+    }
+    a {
+      i {
+        position: absolute;
+        bottom: 0;
+        @include v-middle;
+        color: rgb(8, 196, 196);
+        animation: go-up 2s infinite;
+        @keyframes go-up {
+          0%, 10%, 40%, 70%, 100% {
+            bottom: 10px;
+          }
+          20%, 50%, 60%, 80%, 90% {
+            bottom: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+// history
+.history {
+  padding: {
+    top: 100px;
+  }
+  text-align: center;
+  .container {
+    h2 {
+      text-transform: uppercase;
+      margin-bottom: 3rem;
+      position: relative;
+      &:before {
+        @include blue-line;
+      }
+      &::after {
+        @include square;
+      }
+    }
+    p {
+      color: rgb(163, 159, 159);
+      max-width: 700px;
+      line-height: 1.7;
+      margin: {
+        left: auto;
+        right: auto;
+      }
+    }
+  }
+  .box {
+    margin-top: 6rem;
+    @include multi-columns;
+    position: relative;
+    .image { 
+      overflow: hidden;
+      position: relative;
+      article {
+        overflow: hidden;
+        padding: 1rem;
+        position: absolute;
+        top: 100%;
+        background-color: rgba(34, 186, 233, 0.5);
+        color: white;
+        transition: 0.3s;
+        p {
+          margin: 1rem 0;
+        }
+        .links {
+          a {
+            i {
+              color: white;
+              &:first-child {
+                padding-left: 1.5rem;
+              }
+              &:last-child {
+                padding-right: 1.5rem;
+              }
+            }
+          }
+        }
+      }
+      &:hover article{
+        top: 185px;
+      }
+      h4 {
+        text-transform: uppercase;
+      }
+      img {
+        max-width: 100%;
+      }
+    }
+  }
+}
+// categories
+.categories {
+  background-color: #eee;
+  padding: {
+    top: 6.25rem;
+    bottom: 6.25rem;
+  }
+  .container {
+    .wrapper {
+      @include three-columns;
+      .boxer {
+        background-color: white;
+        padding: 4rem;
+        border-radius: 0.5rem;
+        h3 {
+          text-transform: uppercase;
+          margin: {
+            top: 1.5rem;
+            bottom: 1.5rem;
+          }
+          position: relative;
+          &:before {
+            @include blue-line;
+            top: -10px;
+          }
+        }
+      }
+    }
+  }
+}
+// clients {
+.clients {
+  margin-top: 6rem;
+  .container {
+    p {
+      margin: {
+        top: 3rem;
+        bottom: 1.3rem;
+      }
+    }
+    h1 {
+      position: relative;
+      &:before { 
+        @include blue-line;
+      }
+      &::after {
+        @include square;
+      }
+    }
+    span {
+      color: grey;
+    }
+    .wrap {
+      margin-top: 6rem;
+      @include multi-columns;
+      gap: 2rem;
+    }
+  }
+}
+// info
+.info {
+  background-color: black;
+  padding: {
+    top: 5rem;
+    bottom: 5rem; 
+  }
+  color: white;
+  margin-top: 4rem;
+  .container {
+    @include centering;
+    @media ($small){
+      flex-direction: column;
+    }
+    gap: 2rem;
+    .about,
+    .call {
+      border: 1px solid white;
+      padding: 4rem;
+      @media ($small) {
+        padding: 2rem;
+      }
+    }
+    .about {
+      flex: 1;
+      h1 {
+        margin-bottom: 3rem;
+        position: relative;
+        &:before {
+          @include line;
+        }
+      }
+      p {
+        line-height: 3;
+        color: white;
+      }
+    }
+    .call {
+      flex: 1;
+      width: 100%;
+      h1 {
+        margin-bottom: 3rem;
+        position: relative;
+        &:before {
+          @include line;
+        }
+      }
+      label {
+        display: block;
+        font-size: 1.3rem;
+        text-transform: uppercase;
+        text-align: left;
+        margin: {
+          top: 2rem;
+          bottom: 1.5rem;
+        }
+      }
+      input[type="email"] {
+        @include form;
+      }
+      textarea {
+        @include form;
+        resize: none;
+        min-height: 100px;
+      }
+      input[type="submit"] {
+        display: block;
+        padding: 1rem 1.5rem;
+        margin: {
+          left: auto;
+          top: 1rem;
+        }
+        background-color: skyblue;
+        font: {
+          size: 1rem;
+          weight: bold;
+        }
+        transition: 0.3s;
+        cursor: pointer;
+        &:hover {
+          background-color: rgb(25, 156, 207);
+        }
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+      }
+    }
+  }
+}
+footer {
+  background-color: skyblue;
+  padding: {
+    top: 3rem;
+    bottom: 3rem;
+  }
+  .container {
+    color: white;
+    @media ($min-small) {
+      @include justify-space;
+      .copyright {
+        display: block;
+        margin: {
+          right: auto;
+        }
+      }
+    }
+    $socials: (
+      "facebook": blue,
+      "dribble": red,
+      "twitter": rgb(17, 189, 247),
+    );
+    @each $name, $color in $socials {
+      .#{$name} {
+        color: $color;
+      }
+    }
+    .icons {
+      @include centering;
+      gap: 2rem;
+      @media ($small) {
+        margin-top: 1rem;
+      }
+    }
+  }
+}
